@@ -36,15 +36,15 @@ const Poster = () => {
       <div className="Poster_bot">
         <div className="Poster_option">
           <CameraAltIcon style={{ color: "rgb(57, 206, 255)" }} />
-          <h4>Post photos</h4>
+          <h5>Post photos</h5>
         </div>
         <div className="Poster_option">
           <VideocamIcon style={{ color: "rgba(255, 105, 178, 1)" }} />
-          <h4>Post videos</h4>
+          <h5>Post videos</h5>
         </div>
         <div className="Poster_option">
           <EmojiEmotionsIcon style={{ color: "rgb(255, 159, 57)" }} />
-          <h4>Share your feelings</h4>
+          <h5>Share your feelings</h5>
         </div>
       </div>
     </div>

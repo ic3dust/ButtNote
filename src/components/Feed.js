@@ -17,8 +17,6 @@ const Feed = () => {
         username='Admin'
         image="https://www.siliconrepublic.com/wp-content/uploads/2014/12/img/tired.jpg"
       />
-      <Post />
-      <Post />
     </div>
   )
 }

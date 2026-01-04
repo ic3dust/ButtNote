@@ -36,8 +36,8 @@
     margin: 5px;
     transition: transform 100ms ease-in;
 }
-.Poster_option > h4 {
-    font-size: medium;
+.Poster_option > h5 {
+    font-size: small;
     text-align: center;
     margin-left: 5px;
     cursor: pointer;
