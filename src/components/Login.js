@@ -4,12 +4,13 @@ import "../style/Login.css"
 import Button from '@mui/material/Button';
 import "../style/App.css"
 import { auth, provider } from '../firebase';
+import { signInWithPopup } from "firebase/auth";
 
 
 const Login = () => {
 
     const signIn = () => {
-        auth.signInWithPopup(provider)   
+        signInWithPopup(auth, provider)   
       .then(result => alert(result.user.displayName))
       .catch(error => alert(error.message));
     };
