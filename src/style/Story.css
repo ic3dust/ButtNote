@@ -1,0 +1,52 @@
+@keyframes story{
+    to{
+        transform: rotate(360deg);/* same as from 0 deg to 360deg*/
+    }
+}
+
+.Story{
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 200px;
+    box-shadow: 0px 5px 17px -7px rgba(0,0,0,0.75);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 100ms ease-in;
+    margin-right:10px;
+    color: white;
+}
+.Story:hover{
+    transform: scale(1.07);
+}
+.StoryAvatarWrapper {
+    position: relative;
+    padding: 3px 3px;
+    margin: 5px 5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.StoryAvatarWrapper::before {
+    content: "";/* ::before and ::after does not go without content; element is created and can be styled as a normal div*/
+    position: absolute;
+    inset: 0;/* same as top: 0, bot: 0, right: 0, left: 0*/
+    border-radius: 50%;
+    background: linear-gradient(0deg, rgb(57, 206, 255), rgb(255, 159, 57));
+    animation: story 4s linear infinite;
+    z-index: 0;
+}
+
+.StoryAvatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: block;
+}
+
+.Story > h4{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
