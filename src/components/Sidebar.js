@@ -9,11 +9,26 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import AssistantIcon from '@mui/icons-material/Assistant';
 
+import { useState  } from 'react'; 
+import { useEffect  } from 'react';
+import { useStateValue } from '../StateProvider';
+import defaultPfp from "../img/defaultpfp.png"
+
 const Sidebar = () => {
+  const [{user}] = useStateValue();
+  const [photo, setPhoto] = useState(defaultPfp);
+
+  useEffect(()=>{
+    if(user?.photoURL){
+      setPhoto(user.photoURL);
+    }
+
+  }, [user]);
+
   return (
     <div className="Sidebar">
       <div className="sidebar_profile">
-        <SidebarRow src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS11kPxP9MbKHrxR7wdolw2uS4CYX1ZrWaNDQ&s' title='Simple coder'/>
+        <SidebarRow src={photo} title={user?.displayName}/>
       </div>
       <SidebarRow Icon={FavoriteIcon} title='You liked'/>
       <SidebarRow Icon={BookmarkIcon} title='Featured'/>

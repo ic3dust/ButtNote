@@ -4,11 +4,23 @@ import { Avatar } from "@mui/material";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useStateValue } from '../StateProvider';
+import defaultPfp from "../img/defaultpfp.png"
 
 const Poster = () => {
 
   const [input, setInput] = useState('');//by default = ''
+  const [{user}] = useStateValue();
+  const [photo, setPhoto] = useState(defaultPfp);
+
+  useEffect(()=>{
+    if(user?.photoURL){
+      setPhoto(user.photoURL)
+    }
+  },[user]);
 
   const handleSubmit = e => {
     e.preventDefault();//prevent refresh on submit
@@ -21,7 +33,9 @@ const Poster = () => {
   return (
     <div className="Poster">
       <div className="Poster_top">
-        <Avatar />
+        <div className="Poster_profile">
+          <Avatar src={photo}/>
+        </div>
         <form>
           <input
             value={input}

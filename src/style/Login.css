@@ -21,6 +21,10 @@
 .Login_inside>h2 {
     font-size: medium;
 }
+.Login_inside>button {
+    justify-content: space-evenly;
+    gap: 5px;
+}
 
 .Login_info > img{
     object-fit: contain;

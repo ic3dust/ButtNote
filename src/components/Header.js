@@ -11,7 +11,21 @@ import ChatIcon from '@mui/icons-material/Chat';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 
+import { useStateValue } from '../StateProvider';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import defaultPfp from "../img/defaultpfp.png"
+
 const Header = () => {
+
+    const [{user}] = useStateValue();
+    const [photo, setPhoto] = useState(defaultPfp);
+
+    useEffect(()=>{
+        if(user?.photoURL){
+            setPhoto(user.photoURL);
+        }
+    }, [user]);
 
   return (
     <div className="header">
@@ -53,8 +67,8 @@ const Header = () => {
 
 
         <div className="header_info">
-            <Avatar></Avatar>
-            <h4>Simple coder</h4>
+            <Avatar src={photo}></Avatar>
+            <h4>{user?.displayName || "Buttnote guest"}</h4>
         </div>
             <div className = "right_option right_option--active">
             <ChatIcon></ChatIcon>

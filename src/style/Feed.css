@@ -1,5 +1,5 @@
 .feed{
-    width: 500px;
+    width: 100vw;
     margin: 5vh 20vw;
     display: flex;
     flex-direction: column;

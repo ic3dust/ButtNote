@@ -13,6 +13,15 @@
     padding: 15px;
     padding-bottom: 15px;
 }
+.Poster_profile{
+    transition: transform 100ms ease-in;
+}
+.Poster_profile:hover{
+    transform: scale(1.07);
+}
+.Poster_top > img{
+    transition: transform 100ms ease-in;
+}
 .Poster_input{
     outline-width: 0;
     border: none;
