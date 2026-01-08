@@ -1,9 +1,11 @@
 import React from 'react'
+import "../style/Profile.css"
+import Settings from '../components/Settings'
 
 const Profile = () => {
   return (
-    <div>
-      <h1>Profile</h1>
+    <div className="Profile">
+      <Settings/>
     </div>
   )
 }

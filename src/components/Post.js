@@ -42,7 +42,7 @@ const Post = ({profilePicture, image, username, timestamp, message}) => {
                   <p>Share</p>
               </div>
               <div className="Post_option">
-                  <BookmarkIcon style={{color: "rgb(255, 159, 57)"}} />
+                  <BookmarkIcon style={{color: "rgbstart(255, 159, 57)"}} />
                   <p>Save</p>
               </div>
               <div className="Post_option">
