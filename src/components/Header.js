@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import '../style/Header.css'
 import logo from '../img/logo.svg'
 
@@ -12,14 +12,14 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 import { useStateValue } from '../StateProvider';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import defaultPfp from "../img/defaultpfp.png"
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 
     const [{user}] = useStateValue();
     const [photo, setPhoto] = useState(defaultPfp);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(user?.photoURL){
@@ -67,7 +67,12 @@ const Header = () => {
 
 
         <div className="header_info">
-            <Avatar src={photo}></Avatar>
+            <Avatar
+                src={photo}
+                imgProps={{ referrerPolicy: "no-referrer" }}
+                onError={() => setPhoto(defaultPfp)}
+                onClick={()=>navigate("/profile")}      
+            />
             <h4>{user?.displayName || "Buttnote guest"}</h4>
         </div>
             <div className = "right_option right_option--active">

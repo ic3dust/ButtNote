@@ -34,7 +34,11 @@ const Poster = () => {
     <div className="Poster">
       <div className="Poster_top">
         <div className="Poster_profile">
-          <Avatar src={photo}/>
+            <Avatar
+                src={photo}
+                imgProps={{ referrerPolicy: "no-referrer" }}
+                onError={() => setPhoto(defaultPfp)}
+            />
         </div>
         <form>
           <input

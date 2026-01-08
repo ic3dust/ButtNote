@@ -1,7 +1,8 @@
-.app_body{
-    display:flex;
+.Home_body {
+    display: flex;
 }
-.app{
+
+.Home {
     background-color: rgb(237, 237, 237);
     height: 100vh;
 }

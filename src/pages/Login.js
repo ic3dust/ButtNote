@@ -3,7 +3,6 @@ import logo from "../img/logo.svg"
 import GoogleIcon from '@mui/icons-material/Google';
 import "../style/Login.css"
 import Button from '@mui/material/Button';
-import "../style/App.css"
 import { auth, provider } from '../firebase';
 import { signInWithPopup } from "firebase/auth";
 import { actionTypes } from '../Reducer';
