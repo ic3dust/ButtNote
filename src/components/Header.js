@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React } from 'react'
 import '../style/Header.css'
 import logo from '../img/logo.svg'
 
@@ -17,15 +17,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 
-    const [{user}] = useStateValue();
-    const [photo, setPhoto] = useState(defaultPfp);
+    const stateValue = useStateValue();
+    const user = stateValue?.[0]?.user;
     const navigate = useNavigate();
-
-    useEffect(()=>{
-        if(user?.photoURL){
-            setPhoto(user.photoURL);
-        }
-    }, [user]);
 
   return (
     <div className="header">
@@ -68,12 +62,12 @@ const Header = () => {
 
         <div className="header_info">
             <Avatar
-                src={photo}
+                style={{cursor: "pointer"}}
+                src={user?.photoUrl || defaultPfp}
                 imgProps={{ referrerPolicy: "no-referrer" }}
-                onError={() => setPhoto(defaultPfp)}
                 onClick={()=>navigate("/profile")}      
             />
-            <h4>{user?.displayName || "Buttnote guest"}</h4>
+            <h4 onClick={()=>navigate("/profile")}>{user?.displayName || "Buttnote guest"}</h4>
         </div>
             <div className = "right_option right_option--active">
             <ChatIcon></ChatIcon>

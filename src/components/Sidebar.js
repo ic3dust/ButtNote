@@ -1,13 +1,13 @@
-import { React, useState,useEffect  } from 'react'; 
+import { React, useState  } from 'react'; 
 import '../style/Sidebar.css'
 import SidebarRow from './SidebarRow'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import HistoryIcon from '@mui/icons-material/History';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import PersonSearchIcon from '@mui/icons-material/PersonSearch';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import AssistantIcon from '@mui/icons-material/Assistant';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 
 import { useStateValue } from '../StateProvider';
 import defaultPfp from "../img/defaultpfp.png"
@@ -15,33 +15,29 @@ import defaultPfp from "../img/defaultpfp.png"
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
-  const [{user}] = useStateValue();
-  const [photo, setPhoto] = useState(defaultPfp);
+  const stateValue = useStateValue();
+  const user = stateValue?.[0]?.user;
   const navigate = useNavigate();
-
-  useEffect(()=>{
-    if(user?.photoURL){
-      setPhoto(user.photoURL);
-    }
-
-  }, [user]);
 
   return (
     <div className="Sidebar">
       <div className="sidebar_profile">
-        <SidebarRow
-          src={photo}
-          imgProps={{ referrerPolicy: "no-referrer" }}
-          onError={() => setPhoto(defaultPfp)}
-          title={user?.displayName}
-        />
+        <span onClick={()=>navigate("/profile")}>
+          <SidebarRow
+            src={user?.photoUrl || defaultPfp}
+            imgProps={{ referrerPolicy: "no-referrer" }}
+            title={user?.displayName}
+          />
+        </span>
       </div>
       <SidebarRow Icon={FavoriteIcon} title='You liked'/>
       <SidebarRow Icon={BookmarkIcon} title='Featured'/>
       <SidebarRow Icon={HistoryIcon} title='History'/>
-      <SidebarRow Icon={PersonSearchIcon} title='Following'/>
-      <SidebarRow Icon={PermContactCalendarIcon} title='Followers'/>
+      <span onClick={()=>navigate("/settings")}>
+        <SidebarRow Icon={SettingsIcon} title='Settings'/>
+      </span>
       <SidebarRow Icon={AssistantIcon} title='AI Chatbot'/>
+      <SidebarRow Icon={ContactSupportIcon} title='Support'/>
     </div>
   )
 }

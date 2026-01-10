@@ -10,7 +10,7 @@
 .Poster_top{
     display:flex;
     border-bottom: 1px solid rgb(159, 159, 159);
-    padding: 15px;
+    padding: 20px;
     padding-bottom: 15px;
 }
 .Poster_profile{
@@ -36,6 +36,7 @@
 .Poster_bot{
     display: flex;
     justify-content: space-evenly;
+    padding: 10px;
 }
 .Poster_option{
     display: flex;

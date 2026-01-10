@@ -1,12 +1,38 @@
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate, useNavigate} from "react-router-dom"
+
 import Home from "./pages/Home"
 import Login from "./pages/Login"
+import Settings from "./pages/Settings"
 import Profile from "./pages/Profile"
+
 import { useStateValue } from "./StateProvider"
+import { useEffect } from "react"
+import {auth} from "./firebase"
+import { actionTypes } from "./Reducer"
 
 function App() {
 
     const [{ user }, dispatch] = useStateValue();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged((firebaseUser)=>{
+            if(firebaseUser){
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user:{
+                        uid: firebaseUser.uid,
+                        displayName: firebaseUser.displayName,
+                        email: firebaseUser.email,
+                        photoUrl: firebaseUser.photoURL,
+                    },
+                });
+            }else{
+                dispatch({type:actionTypes.SET_USER, user: null});
+            }
+        });
+        return () => unsubscribe();
+    }, [dispatch, navigate]);
 
     return (
         <div className="App">
@@ -18,7 +44,7 @@ function App() {
                     <Route
                         path="/"
                         element={
-                            user?(<Navigate to="/home" replace/>):<Login />
+                            !user?<Login />:<Navigate to ="/home"/>
                         }
                     />
 
@@ -28,8 +54,14 @@ function App() {
                     />
 
                     <Route
+                        path="/settings"
+                        element={<Settings/>}
+                    />
+                    <Route 
+                    
                         path="/profile"
                         element={<Profile/>}
+
                     />
 
                     <Route

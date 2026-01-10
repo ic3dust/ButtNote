@@ -1,16 +1,24 @@
 import React from 'react'
 import "../style/Settings.css"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Themes from './Themes';
-import Button from '@mui/material/Button';
+import Themes from '../components/Themes';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+
+import NFTs from '../components/NFTs';
+import defaultPfp from "../img/defaultpfp.png"
+import { useStateValue } from '../StateProvider';
+import {Avatar} from "@mui/material";
 
 const Settings = () => {
 
     const [opened, setOpened] = useState(false);
+    const [theme, setTheme] = useState("light");
+    const [photo, setPhoto] = useState(defaultPfp);
+    const stateValue = useStateValue();
+    const user = stateValue?.[0]?.user;
 
     const handleToggle = () => {
         setOpened(!opened);
@@ -20,13 +28,22 @@ const Settings = () => {
         alert('address handled');
     }
 
+    const handleDarkTheme = () => setTheme("dark");
+    const handleLightTheme = () => setTheme("light");
+
+    useEffect(()=>{
+      if(user?.photoUrl){
+        setPhoto(user.photoUrl);
+      }
+    }, [user]);
+
     return (
-  <div className="settings-container">
+  <div className={`settings-container ${theme}`}>
 
     <header className="settings_header">
       <div className="settings_logo"><h2>Settings</h2></div>
       <div className="search-bar">
-        <input type="text" placeholder="Search settings" />
+        <input class="inputField" type="text" placeholder="Search settings" />
       </div>
     </header>
 
@@ -55,19 +72,18 @@ const Settings = () => {
                                 
                 <div className="themeWrapper">
                     <button className="togleArrow" onClick={handleToggle}>
-                                        {opened ? (
-                                            <KeyboardArrowUpIcon />
-                                        ) : (
-                                            <KeyboardArrowDownIcon />
-                    
-                                        )}
+                      {opened ? (<KeyboardArrowUpIcon />) : (<KeyboardArrowDownIcon />)}
                     </button>
                     <div className={`themeOptions ${opened? 'show':''}`}>
-                        <span className="themeOption">
-                            <DarkModeIcon style={{ color:"rgba(43, 43, 43, 1)"}} />
+                        <span className="themeOption" onClick={handleDarkTheme}>
+                            <DarkModeIcon 
+                            style={{ color:"rgba(43, 43, 43, 1)"}}
+                            />
                         </span>
-                        <span className="themeOption">
-                            <LightModeIcon className="themeOption" style={{ color: "rgb(255, 159, 57)" }} />
+                        <span className="themeOption" onClick={handleLightTheme}>
+                            <LightModeIcon className="themeOption" 
+                            style={{ color: "rgb(255, 159, 57)" }} 
+                            />
                         </span>
                     </div>
                 </div>
@@ -79,13 +95,25 @@ const Settings = () => {
             
             <div className="setting-row">
               <div className="settings_text">
-                <div className="title">Set an NFT Avatar</div>
+                <h4>Set an NFT Avatar</h4>
+                <h5>Enter your wallet address</h5>
+
+                <div className="avatar_palete">
+                  <span className="avatar">
+                    <Avatar
+                      src={photo}
+                      imgProps={{ referrerPolicy: "no-referrer" }}
+                      onError={() => setPhoto(defaultPfp)}
+                    />
+                  </span>
+                  <div className="avatar_options"><NFTs/></div>
+                </div>
+
               </div>
-              <div className="settings_input_field">
-                <input type="text" id="wallet_addr" placeholder="Your wallet address here"/>
+              <div className="addressHandler">
+                <input className="inputField" type="text" id="wallet_addr" placeholder="Your wallet address here"/>
+                <button className="btn" onClick={handleAddress} type="submit">Submit</button>
               </div>
-                <Button onClick={handleAddress}>Primary</Button>
-                <div id = "nfts"/>
             </div>
           </div>
         </section>

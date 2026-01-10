@@ -1,22 +1,48 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import "../style/Feed.css"
 import StoryReel from "./StoryReel"
 import Poster from "./Poster"
 import Post from "./Post"
+import db from "../firebase";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 const Feed = () => {
+
+  const [posts, setPosts] = useState([]);
+
+useEffect(() => {
+  const q = query(collection(db, "posts"), orderBy("timestamp","desc"));
+
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    setPosts(
+      snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }))
+    );
+  });
+
+  return () => unsubscribe();
+}, []);
+
   return (
     <div className="feed">
       <StoryReel />
       <Poster />
 
-      <Post
-        profilePicture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS11kPxP9MbKHrxR7wdolw2uS4CYX1ZrWaNDQ&s"
-        message='Hey'
-        timestamp='Timestamp'
-        username='Admin'
-        image="https://www.siliconrepublic.com/wp-content/uploads/2014/12/img/tired.jpg"
-      />
+      {posts.map(post=>{
+        return(
+          <Post
+          key={post.data.id}
+          profilePicture={post.data.profilePicture}
+          message={post.data.message}
+          timestamp={post.data.timestamp}
+          username={post.data.username}
+          image={post.data.image}
+          />
+
+        )
+      })}
     </div>
   )
 }
