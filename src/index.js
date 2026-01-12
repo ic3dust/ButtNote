@@ -5,6 +5,7 @@ import App from "./App"
 import reportWebVitals from './reportWebVitals';
 import {StateProvider } from "./StateProvider";
 import {PageProvider } from "./PageProvider";
+import { ThemesProvider } from './ThemesProvider'
 import Reducer, { initialState } from "./Reducer"; 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -12,11 +13,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} Reducer={Reducer}>
-      <PageProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </PageProvider>
+      <ThemesProvider>
+        <PageProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PageProvider>
+      </ThemesProvider>
     </StateProvider>
   </React.StrictMode>
 );

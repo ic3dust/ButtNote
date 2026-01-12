@@ -8,6 +8,8 @@ import FlagIcon from '@mui/icons-material/Flag';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
 import ShareIcon from '@mui/icons-material/Share';
 
+import {colors} from "../colors"
+
 const Post = ({profilePicture, image, username, timestamp, message}) => {
   return (
     <div className="Post">
@@ -26,7 +28,7 @@ const Post = ({profilePicture, image, username, timestamp, message}) => {
           </div>
           <div className="Post_options">
               <div className="Post_option">
-                  <ThumbUpIcon style={{color: "rgb(57, 206, 255)"}} />
+                  <ThumbUpIcon style={{color: colors.blue}} />
                   <p>Like</p>
               </div>
               <div className="Post_option">
@@ -42,11 +44,11 @@ const Post = ({profilePicture, image, username, timestamp, message}) => {
                   <p>Share</p>
               </div>
               <div className="Post_option">
-                  <BookmarkIcon style={{color: "rgbstart(255, 159, 57)"}} />
+                  <BookmarkIcon style={{color: colors.yellow}} />
                   <p>Save</p>
               </div>
               <div className="Post_option">
-                  <FlagIcon style={{color: "rgba(255, 105, 178, 1)"}}/>
+                  <FlagIcon style={{color: colors.pink}}/>
                   <p>Report</p>
               </div>
           </div>

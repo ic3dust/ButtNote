@@ -1,6 +1,7 @@
 import { React } from 'react'
 import '../style/Header.css'
 import logo from '../img/logo.svg'
+import {colors} from "../colors"
 
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -77,7 +78,7 @@ const Header = () => {
                 <NotificationsIcon></NotificationsIcon>
             </div>
             <div className = "right_option">
-                <LogoutIcon style={{color: "rgb(255, 0, 123)"}}></LogoutIcon>
+                <LogoutIcon style={{color: colors.error}}></LogoutIcon>
             </div>
     </div>
 

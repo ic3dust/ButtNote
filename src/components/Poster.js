@@ -1,4 +1,5 @@
 import "../style/Poster.css"
+import {colors} from "../colors"
 import { Avatar } from "@mui/material";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import VideocamIcon from '@mui/icons-material/Videocam';
@@ -48,15 +49,15 @@ const Poster = () => {
       </div>
       <div className="Poster_bot">
         <div className="Poster_option">
-          <CameraAltIcon style={{ color: "rgb(57, 206, 255)" }} />
+          <CameraAltIcon style={{ color: colors.blue }} />
           <h5>Post photos</h5>
         </div>
         <div className="Poster_option">
-          <VideocamIcon style={{ color: "rgba(255, 105, 178, 1)" }} />
+          <VideocamIcon style={{ color: colors.pink }} />
           <h5>Post videos</h5>
         </div>
         <div className="Poster_option">
-          <EmojiEmotionsIcon style={{ color: "rgb(255, 159, 57)" }} />
+          <EmojiEmotionsIcon style={{ color: colors.yellow }} />
           <h5>Share your feelings</h5>
         </div>
       </div>

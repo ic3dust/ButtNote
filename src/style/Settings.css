@@ -302,3 +302,10 @@
     display: flex;
     margin-top: 10px;
 }
+
+.inputMsg{
+    display: flex;
+    font-size: medium;
+    margin-top: 10px;
+    color:rgb(255, 0, 123);
+}
