@@ -10,6 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ChatIcon from '@mui/icons-material/Chat';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { useStateValue } from '../StateProvider';
 import defaultPfp from "../img/defaultpfp.png"
@@ -74,6 +75,9 @@ const Header = () => {
             </div>
             <div className = "right_option">
                 <NotificationsIcon></NotificationsIcon>
+            </div>
+            <div className = "right_option">
+                <LogoutIcon style={{color: "rgb(255, 0, 123)"}}></LogoutIcon>
             </div>
     </div>
 

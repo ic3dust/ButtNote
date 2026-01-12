@@ -1,12 +1,11 @@
-import React from 'react'
-import {Web3} from 'web3'
+import {React} from 'react'
 
-const NFTs = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+const NFTs=({image,id}) =>{
+    return(
+        <div>
+            <img key={id} src={image}/>
+        </div>
+    );
 }
 
 export default NFTs

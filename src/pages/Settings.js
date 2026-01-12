@@ -1,16 +1,18 @@
-import React from 'react'
+
 import "../style/Settings.css"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Themes from '../components/Themes';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 import NFTs from '../components/NFTs';
+import { fetchNFTs } from '../utils/fetchNFTs';
 import defaultPfp from "../img/defaultpfp.png"
 import { useStateValue } from '../StateProvider';
 import {Avatar} from "@mui/material";
+
 
 const Settings = () => {
 
@@ -20,13 +22,13 @@ const Settings = () => {
     const stateValue = useStateValue();
     const user = stateValue?.[0]?.user;
 
+    const [owner, setOwner] = useState("");
+    const [contractAddress, setContractAddress] = useState("");
+    const[nfts, setNFTs] = useState("");
+
     const handleToggle = () => {
         setOpened(!opened);
     };
-
-    const handleAddress = () => {
-        alert('address handled');
-    }
 
     const handleDarkTheme = () => setTheme("dark");
     const handleLightTheme = () => setTheme("light");
@@ -95,24 +97,41 @@ const Settings = () => {
             
             <div className="setting-row">
               <div className="settings_text">
-                <h4>Set an NFT Avatar</h4>
-                <h5>Enter your wallet address</h5>
 
-                <div className="avatar_palete">
-                  <span className="avatar">
-                    <Avatar
-                      src={photo}
-                      imgProps={{ referrerPolicy: "no-referrer" }}
-                      onError={() => setPhoto(defaultPfp)}
-                    />
-                  </span>
-                  <div className="avatar_options"><NFTs/></div>
+                <div className="nft-option">
+                  <div className="nft-info">
+                    <h4>Set an NFT Avatar</h4>
+                    <h5>Enter your wallet address</h5>
+                  </div>
+                  <div className="nft-img"><img src="https://cdn.prod.website-files.com/64b702e0e92a993f08b979ce/66e00f11863261a4bac99c94_65d4822425e75b9af45e3aa9_Base_Wordmark_Blue.png"/></div>
+                  <div className="addressHandler">
+                    <input className="inputField" value={owner} onChange={(e) => setOwner(e.target.value)} type="text" placeholder="Your wallet address here"/>
+                    <button className="btn" onClick={()=>fetchNFTs(owner,contractAddress, setNFTs)} type="submit">Submit</button>
+                  </div>
                 </div>
 
-              </div>
-              <div className="addressHandler">
-                <input className="inputField" type="text" id="wallet_addr" placeholder="Your wallet address here"/>
-                <button className="btn" onClick={handleAddress} type="submit">Submit</button>
+                <div className="all-avatars">
+                    <span className="avatar">
+                      <Avatar
+                        src={photo}
+                        imgProps={{ referrerPolicy: "no-referrer" }}
+                        onError={() => setPhoto(defaultPfp)}
+                      />
+                      <div className="avatar_options">
+                        {nfts && nfts.length > 0 ? (
+                          nfts.map(nft => (
+                            <NFTs
+                            image={nft.media[0].gateway}
+                            id={nft.id.tokenId}
+                            />
+                          ))
+                        ) : (
+                          <div>No NFTs found</div>
+                        )}
+                      </div>
+                    </span>
+                </div>
+
               </div>
             </div>
           </div>

@@ -160,7 +160,7 @@
     flex-grow: 1;
     margin-left: 8px;
 }
-.settings_text > h5{
+.settings_text > h5, .nft-info h5{
     font-size: small;
     margin-top: 5px;
     color: rgb(87, 87, 87);
@@ -168,7 +168,7 @@
 .settings-container.dark .settings_text > h5{
     color: rgb(162, 162, 162);
 }
-.setting-row > h4{
+.setting-row > h4, .nft-info h4{
     font-size: medium;
 }
 
@@ -249,7 +249,7 @@
 }
 .btn:hover{
     transform: scale(1.07);
-    color: #323D40;
+    color: #00A7D1;
 }
 .settings-container.dark .btn:hover{
     color: rgb(37, 33, 41);
@@ -262,11 +262,43 @@
 
 .addressHandler{
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
     gap: 15px;
     padding: 0 15px;
 }
 
 .avatar{
     padding: 10px;
+}
+
+.nft-img img{
+    width:75px;
+    height:20px;
+}
+.nft-img{
+    display: flex;
+    width:100%;
+    justify-content: right;
+    align-items: center;
+}
+
+.nft-info{
+    display:flex;
+    flex-direction: column;
+    width:50%;
+}
+
+.nft-option{
+    display: flex;
+}
+
+.all-avatars{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.avatar_options{
+    display: flex;
+    margin-top: 10px;
 }
