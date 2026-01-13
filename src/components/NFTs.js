@@ -1,9 +1,15 @@
 import {React} from 'react'
+import LF from "../img/load_fail.png"
 
-const NFTs=({image,id}) =>{
+const NFTs=({image,id, onRemove}) =>{
+
     return(
         <div>
-            <img key={id} src={image}/>
+            <img 
+            src={image}
+            alt={`NFT${id}`}
+            loading="lazy"
+            />
         </div>
     );
 }

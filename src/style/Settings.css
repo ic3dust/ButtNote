@@ -299,8 +299,19 @@
 }
 
 .avatar_options{
-    display: flex;
+    display:grid;
+    grid-template-columns: repeat(8,1fr);
+    width: 100%;
     margin-top: 10px;
+}
+.avatar_options img{
+    height: 75px;
+    width: 75px;
+    cursor: pointer;
+    transition: transform 100ms ease-in;
+}
+.avatar_options img:hover{
+    transform: scale(1.07);
 }
 
 .inputMsg{

@@ -27,9 +27,11 @@ const Settings = () => {
 
     const [owner, setOwner] = useState("");
     const [contractAddress, setContractAddress] = useState("");
-    const[nfts, setNFTs] = useState("");
+    const[nfts, setNFTs] = useState([]);
+    const [validNFTs, setValidNFTs] = useState([]);
+    const imgNfts = (nfts||[]).filter(nft=>nft?.media?.[0]?.gateway && nft.media[0].gateway.trim() !=="");
 
-    const handleSubmit = () =>{
+    const handleSubmit = async () =>{
       if(!walletInput.test(owner.trim())){
         setInputError("Invalid wallet address. Example: 0xd8...");
         return;
@@ -38,7 +40,40 @@ const Settings = () => {
       
       setSearched(true);
       setLoading(true);
-      fetchNFTs(owner, contractAddress, setNFTs).finally(()=>setLoading(false));
+      try{
+
+      const data = await fetchNFTs(owner, contractAddress, setNFTs);
+
+      const nftsToLoad = data?.ownedNfts||[];
+      setValidNFTs([]);
+
+      nftsToLoad.forEach(nft=>{
+        const url = nft?.media?.[0]?.gateway;
+        if(!url) return;
+
+        const img = new Image();
+        img.src = url;
+
+        const timer = setTimeout(()=>{
+            
+        },3000);
+
+        img.onload=()=>{
+          clearTimeout(timer);
+          setValidNFTs(prev=>[...prev, nft]);
+        }
+
+        img.onerror=()=>{
+            clearTimeout(timer);
+        };
+
+
+      })}
+      catch(err){
+        console.log("Failed to fetch: ", err);
+      }
+      finally{      setLoading(false);}
+
     }
 
     useEffect(()=>{
@@ -98,18 +133,20 @@ const Settings = () => {
                       />
                     </span>
                     <div className="avatar_options">
-                      {loading? null : nfts.length > 0 ? (
-                          nfts.map((nft) => (
-                            nft?.media?.[0]?.gateway? (
+                      {loading? null : validNFTs.length > 0 ? (
+
+                          validNFTs.map((nft) => (
                               <NFTs
+                                key={nft.id.tokenId}
                                 image={nft.media[0].gateway}
                                 id={nft.id.tokenId}
-                            />
-                            ) : null
-                          ))
-                        ) : ( 
-                          searched && <h4 className="inputMsg">No NFTs found</h4>
-                        )}
+                                onRemove={(id)=>{
+                                  setNFTs(prev=>prev.filter(element=>element.id.tokenId !== id))
+                                }}
+                            />)) 
+                            
+                            ):(searched && <h4 className="inputMsg">No NFTs found</h4>)}
+
                       </div>
                 </div>
 
