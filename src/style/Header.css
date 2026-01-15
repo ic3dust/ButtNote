@@ -112,3 +112,24 @@
 .right_option--active > .MuiSvgIcon-root{
     border-bottom:4px solid rgb(255, 159, 57);
 }
+.logout_btn{
+    position:relative;
+}
+.logout_btn::after {
+  content: attr(data-title);
+  position: fixed;
+  color: white;
+  font-size: medium;
+  background-color: rgba(0,0,0,0.65);
+  border:none;
+  border-radius:8px;
+  padding: 10px 10px;
+  top: 100px;
+  right: 10px;
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
+
+.logout_btn:hover::after {
+  opacity: 1;
+}

@@ -10,9 +10,11 @@ import { useEffect } from "react"
 import {auth} from "./firebase"
 import { actionTypes } from "./Reducer"
 
+import ProtectedRoute from "./ProtectedRoute"
+
 function App() {
 
-    const [{ user }, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -44,23 +46,29 @@ function App() {
                     <Route
                         path="/"
                         element={
-                            !user?<Login />:<Navigate to ="/home"/>
+                            <Login />
                         }
                     />
 
                     <Route
                         path="/home"
-                        element={!user? (<Navigate to = "/" replace/>):<Home />}
+                        element={
+                         <ProtectedRoute><Home/></ProtectedRoute>   
+                    }
                     />
 
                     <Route
                         path="/settings"
-                        element={<Settings/>}
+                        element={
+                        <ProtectedRoute>
+                        <Settings/>
+                        </ProtectedRoute>
+                    }
                     />
                     <Route 
                     
                         path="/profile"
-                        element={<Profile/>}
+                        element={<ProtectedRoute><Profile/></ProtectedRoute>}
 
                     />
 

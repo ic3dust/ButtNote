@@ -7,11 +7,12 @@ import { auth, provider } from '../firebase';
 import { signInWithPopup } from "firebase/auth";
 import { actionTypes } from '../Reducer';
 import { useStateValue } from '../StateProvider';
+import { Navigate } from 'react-router-dom';
 
 
 const Login = () => {
 
-  const [state, dispatch] = useStateValue();
+  const [{user}, dispatch] = useStateValue();
 
     const signIn = () => {
       signInWithPopup(auth,provider)   
@@ -25,6 +26,10 @@ const Login = () => {
       .catch(error => alert(error.message));
 
     };
+
+    if(user){
+      return <Navigate to="/home" replace/>
+    }
 
   return (
     <div className="Login">

@@ -1,20 +1,18 @@
 import { React } from 'react'
 import '../style/Header.css'
 import logo from '../img/logo.svg'
-import {colors} from "../colors"
 
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import GroupIcon from '@mui/icons-material/Group';
 import {Avatar} from "@mui/material";
-import SettingsIcon from '@mui/icons-material/Settings';
 import ChatIcon from '@mui/icons-material/Chat';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
-import LogoutIcon from '@mui/icons-material/Logout';
 
-import defaultPfp from "../img/defaultpfp.png"
 import { useNavigate } from 'react-router-dom';
+
+import LogoutBtn from "../utils/logout"
 
 const Header = ({avatar, uname}) => {
 
@@ -74,13 +72,14 @@ const Header = ({avatar, uname}) => {
             <div className = "right_option">
                 <NotificationsIcon></NotificationsIcon>
             </div>
-            <div className = "right_option">
-                <LogoutIcon style={{color: colors.error}}></LogoutIcon>
+            <div className = "right_option" >
+                <div className="logout_btn" data-title="Log out from the account?">
+                    <LogoutBtn />
+                </div>
             </div>
     </div>
-
-
     </div>
+    
 
   )
 }

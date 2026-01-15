@@ -6,6 +6,7 @@ export const initialState = {
 export const actionTypes = {
     SET_USER: "SET_USER",
     SET_THEME: "SET_THEME",
+    LOGOUT: "LOGOUT",
 };
 
 const Reducer = (state, action) => {
@@ -21,6 +22,11 @@ const Reducer = (state, action) => {
             return{
                 ...state,
                 theme: action.theme,
+            }
+        case actionTypes.LOGOUT:
+            return{
+                ...state,
+                user:null,
             }
 
         default: 
