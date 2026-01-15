@@ -9,14 +9,12 @@ import AssistantIcon from '@mui/icons-material/Assistant';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 
-import { useStateValue } from '../StateProvider';
 import defaultPfp from "../img/defaultpfp.png"
 
 import { useNavigate } from 'react-router-dom';
 
-const Sidebar = () => {
-  const stateValue = useStateValue();
-  const user = stateValue?.[0]?.user;
+const Sidebar = ({avatar, uname}) => {
+
   const navigate = useNavigate();
 
   return (
@@ -24,9 +22,9 @@ const Sidebar = () => {
       <div className="sidebar_profile">
         <span onClick={()=>navigate("/profile")}>
           <SidebarRow
-            src={user?.photoUrl || defaultPfp}
+            src={avatar}
             imgProps={{ referrerPolicy: "no-referrer" }}
-            title={user?.displayName}
+            title={uname}
           />
         </span>
       </div>

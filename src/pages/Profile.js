@@ -4,12 +4,15 @@ import { useStateValue } from '../StateProvider'
 import { useNavigate } from 'react-router-dom'
 import defaultPfp from "../img/defaultpfp.png"
 import "../style/Profile.css"
+import { useUname  } from '../providers/UnameProvider' 
+import { useAvatar } from '../providers/AvatarProvider'
 
 const Profile = () => {
 
-    const stateValue = useStateValue();
+    const [{user}] = useStateValue();
+    const avatar = useAvatar();
+    const uname = useUname();
     const navigate = useNavigate();
-    const user = stateValue?.[0]?.user;
 
   return (
     <div>
@@ -21,12 +24,12 @@ const Profile = () => {
               <div className="profile-card-bot">
                       <span className="avatar">
                           <Avatar
-                           src={user?.photoUrl || defaultPfp}
+                           src={avatar}
                            imgProps={{referrerPolicy: "no-referrer"}}
                            style={{width: "60px", height: "60px"}}
                            />
                       </span>
-                    <h3 contentEditable="true">{user?.displayname || "ButtNote user"}</h3>
+                    <h3 contentEditable="true">{uname}</h3>
               </div>
       </div>
     </div>

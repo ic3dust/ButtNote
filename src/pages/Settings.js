@@ -9,38 +9,40 @@ import { fetchNFTs } from '../utils/fetchNFTs';
 import defaultPfp from "../img/defaultpfp.png"
 import { useStateValue } from '../StateProvider';
 import {Avatar} from "@mui/material";
-import { ThemesContext } from "../ThemesProvider";
+import { ThemesContext } from "../providers/ThemesProvider";
 import ThemesRow from "../components/ThemesRow";
+
+import { useAvatar } from "../providers/AvatarProvider";
 
 const Settings = () => {
 
   const {theme}=useContext(ThemesContext);
 
-    const [photo, setPhoto] = useState(defaultPfp);
-    const stateValue = useStateValue();
-    const user = stateValue?.[0]?.user;
+  const [photo, setPhoto] = useState(defaultPfp);
+  const [{user}] = useStateValue();
+  const avatar = useAvatar();
 
-    const [searched, setSearched] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [inputError, setInputError] = useState("");
-    const walletInput = /^0x[a-fA-F0-9]{40}$/;
+  const [searched, setSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [inputError, setInputError] = useState("");
+  const walletInput = /^0x[a-fA-F0-9]{40}$/;
 
-    const [owner, setOwner] = useState("");
-    const [contractAddress, setContractAddress] = useState("");
-    const[nfts, setNFTs] = useState([]);
-    const [validNFTs, setValidNFTs] = useState([]);
-    const imgNfts = (nfts||[]).filter(nft=>nft?.media?.[0]?.gateway && nft.media[0].gateway.trim() !=="");
+  const [owner, setOwner] = useState("");
+  const [contractAddress, setContractAddress] = useState("");
+  const[nfts, setNFTs] = useState([]);
+  const [validNFTs, setValidNFTs] = useState([]);
+  const imgNfts = (nfts||[]).filter(nft=>nft?.media?.[0]?.gateway && nft.media[0].gateway.trim() !=="");
 
-    const handleSubmit = async () =>{
-      if(!walletInput.test(owner.trim())){
-        setInputError("Invalid wallet address. Example: 0xd8...");
-        return;
-      }
-      setInputError("");
+  const handleSubmit = async () =>{
+    if(!walletInput.test(owner.trim())){
+      setInputError("Invalid wallet address. Example: 0xd8...");
+      return;
+    }
+    setInputError("");
       
-      setSearched(true);
-      setLoading(true);
-      try{
+    setSearched(true);
+    setLoading(true);
+    try{
 
       const data = await fetchNFTs(owner, contractAddress, setNFTs);
 

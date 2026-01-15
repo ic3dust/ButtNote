@@ -1,10 +1,9 @@
 import {React, useState, useContext} from 'react'
-import { ThemesContext } from '../ThemesProvider';
+import { ThemesContext } from '../providers/ThemesProvider';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Themes from '../components/Themes';
 import "../style/Settings.css"
 import { colors } from '../colors';
 
@@ -44,9 +43,6 @@ const ThemesRow = () => {
             </div>
         </div>
                                 
-        <div className="themes">
-            <Themes/>
-        </div>
     </div>
   )
 }

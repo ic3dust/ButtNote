@@ -11,11 +11,9 @@ import defaultPfp from "../img/defaultpfp.png"
 
 import { useNavigate } from "react-router-dom";
 
-const Poster = () => {
+const Poster = ({avatar}) => {
 
   const [input, setInput] = useState('');//by default = ''
-  const stateValue = useStateValue();
-  const user = stateValue?.[0]?.user;
 
   const navigate = useNavigate();
 
@@ -32,7 +30,7 @@ const Poster = () => {
       <div className="Poster_top">
         <span className="Poster_profile" onClick={()=>navigate("/profile")}>
             <Avatar
-                src={user?.photoUrl || defaultPfp}
+                src={avatar}
                 imgProps={{ referrerPolicy: "no-referrer" }}
             />
         </span>

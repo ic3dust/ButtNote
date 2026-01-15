@@ -13,14 +13,11 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { useStateValue } from '../StateProvider';
 import defaultPfp from "../img/defaultpfp.png"
 import { useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({avatar, uname}) => {
 
-    const stateValue = useStateValue();
-    const user = stateValue?.[0]?.user;
     const navigate = useNavigate();
 
   return (
@@ -65,11 +62,11 @@ const Header = () => {
         <div className="header_info">
             <Avatar
                 style={{cursor: "pointer"}}
-                src={user?.photoUrl || defaultPfp}
+                src={avatar}
                 imgProps={{ referrerPolicy: "no-referrer" }}
                 onClick={()=>navigate("/profile")}      
             />
-            <h4 onClick={()=>navigate("/profile")}>{user?.displayName || "Buttnote guest"}</h4>
+            <h4 onClick={()=>navigate("/profile")}>{uname}</h4>
         </div>
             <div className = "right_option right_option--active">
             <ChatIcon></ChatIcon>

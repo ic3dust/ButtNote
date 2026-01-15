@@ -5,10 +5,12 @@ import Poster from "./Poster"
 import Post from "./Post"
 import db from "../firebase";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { useAvatar } from '../providers/AvatarProvider'
 
 const Feed = () => {
 
   const [posts, setPosts] = useState([]);
+  const avatar = useAvatar();
 
 useEffect(() => {
   const q = query(collection(db, "posts"), orderBy("timestamp","desc"));
@@ -28,7 +30,7 @@ useEffect(() => {
   return (
     <div className="feed">
       <StoryReel />
-      <Poster />
+      <Poster avatar={avatar}/>
 
       {posts.map(post=>{
         return(

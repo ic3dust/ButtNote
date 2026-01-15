@@ -4,21 +4,27 @@ import './index.css';
 import App from "./App"
 import reportWebVitals from './reportWebVitals';
 import {StateProvider } from "./StateProvider";
-import {PageProvider } from "./PageProvider";
-import { ThemesProvider } from './ThemesProvider'
+import {PageProvider } from "./providers/PageProvider";
+import { ThemesProvider } from './providers/ThemesProvider'
 import Reducer, { initialState } from "./Reducer"; 
 import { BrowserRouter } from 'react-router-dom';
+import {AvatarProvider} from "./providers/AvatarProvider";
+import {UnameProvider} from "./providers/UnameProvider"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} Reducer={Reducer}>
       <ThemesProvider>
-        <PageProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </PageProvider>
+        <AvatarProvider>
+          <UnameProvider>
+            <PageProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </PageProvider>
+          </UnameProvider>
+        </AvatarProvider>
       </ThemesProvider>
     </StateProvider>
   </React.StrictMode>
